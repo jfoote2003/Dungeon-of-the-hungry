@@ -1,0 +1,23 @@
+extends Node
+
+var inventory_contents : Array = []
+
+signal inventory_updated
+
+@onready var player = $"."
+
+func _ready() -> void:
+	inventory_contents.resize(30)
+
+func add_item() -> void:
+	inventory_updated.emit()
+	pass
+
+func remove_item() -> void:
+	inventory_updated.emit()
+	pass
+
+func change_inventory_size() -> void:
+	inventory_updated.emit()
+	pass
+
