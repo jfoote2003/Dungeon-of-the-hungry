@@ -1,0 +1,35 @@
+extends ProgressBar
+
+@onready var damage_bar = $DamageBar
+@onready var timer = $Timer
+var health : int = 0 : set = _set_health
+#var max_health : int = 0 : set = _set_max_health
+
+func _set_health(new_health : int) -> void:
+	var prev_health = health
+	health = min(max_value,new_health)
+	value = health
+	
+	if health <= 0:
+		queue_free()
+	
+	if health < prev_health:
+		timer.start()
+	else:
+		damage_bar.value = health
+
+func decrease_health(damage : int) -> void:
+	health-=damage
+	_set_health(health)
+
+
+func init_health(_health,_max_health):
+	health = _health
+	max_value = _max_health
+	value = health
+	damage_bar.max_value = _max_health
+	damage_bar.value = value
+
+
+func _on_timer_timeout():
+	damage_bar.value = health
