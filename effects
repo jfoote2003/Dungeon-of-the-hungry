@@ -1,0 +1,38 @@
+class_name Effects extends Resource
+
+@export var speed_increase : int = 0
+@export var speed_increase_multi : int = 0
+
+@export var fire_damage : int = 0
+@export var fire_resistance_percent : int = 0
+
+@export var ice_damage : int = 0
+@export var ice_resistance_percent : int = 0
+
+@export var lightning_damage : int = 0
+@export var lightning_resistance_percent : int = 0
+
+@export var necrotic_damage : int = 0
+@export var necrotic_resistance_percent : int = 0
+
+@export var poison_damage : int = 0
+@export var poison_resistance_percent : int = 0
+
+@export var holy_damage : int = 0
+@export var holy_resistance_percent : int = 0
+
+@export var chaos_damage : int = 0
+@export var chaos_resistance_percent : int = 0
+
+@export var physical_damage : int = 0
+@export var phsyical_resistance_percent : int = 0
+@export var physical_damage_multi : int = 0
+
+@export var luck_increase : int = 0
+#stats for character
+@export var combat_increase : int = 0
+@export var intellect_increase : int = 0
+@export var worship_increase : int = 0
+@export var cooking_increase : int = 0
+@export var stealth_increase : int = 0
+
