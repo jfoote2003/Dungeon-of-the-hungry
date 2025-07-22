@@ -1,0 +1,4 @@
+class_name ItemDataHelmet extends ItemData
+
+@export var defence : int = 0
+@export var effects : Effects
