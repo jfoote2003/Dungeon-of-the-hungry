@@ -1,0 +1,35 @@
+class_name PlayerClass extends Resource
+
+@export_enum("Berserker","Samurai","Landsknecht","Mage","Healer","Cook","Thief","Debug") var ClassName: String
+
+#stats
+@export_range(8,18) var Strength : int #affect dmg with str based weapons and moving objects?
+@export_range(8,18) var Dexerity : int #affects dmg with dex weapons, lockpicking and dodging frames?
+@export_range(8,18) var Toughness : int #health and status effect build up
+@export_range(8,18) var Knowledge : int #spell casting mod for mage and also affects thief and cook
+@export_range(8,18) var Faith : int #spell casting mod for samurai and healer
+
+#skills
+var cooking : int
+
+@export var texture : Texture2D
+
+
+
+func activate_ability():
+	if ClassName == "Berserker":
+		print("Berserker")
+	elif ClassName == "Samurai":
+		print("Samurai")
+	elif ClassName == "Landsknecht":
+		print("Landsknecht")
+	elif ClassName == "Mage":
+		print("Mage")
+	elif ClassName == "Healer":
+		print("Healer")
+	elif ClassName == "Cook":
+		print("Cook")
+	elif ClassName == "Thief":
+		print("Thief")
+	else:
+		print("no class")
