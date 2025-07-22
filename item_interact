@@ -1,0 +1,32 @@
+extends Area2D
+
+@export var slot_data : SlotData
+@onready var sprite : Sprite2D = $Sprite2D
+
+var entered : bool = false
+var player : Player = null
+
+func _ready() -> void:
+	$".".position = grid_snap(16)
+	sprite.texture = slot_data.item_data.texture
+
+func _process(_delta):
+	if Input.is_action_just_pressed("pickup") and entered:
+		if player.inventory_data.pick_up_slot_data(slot_data):
+			queue_free()
+	pass
+
+func _on_body_entered(body):
+	if body is Player:
+		entered = true
+		player = body
+
+func _on_body_exited(body):
+	if body is Player:
+		entered = false
+		player = null
+
+func grid_snap(size : int) -> Vector2:
+	var new_x = round(position.x / size) * size
+	var new_y = round(position.y / size) * size
+	return Vector2(new_x,new_y)
