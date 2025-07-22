@@ -1,0 +1,14 @@
+class_name Recipe extends Resource
+
+@export var Recipe_output : ItemDataConsumable
+@export var list_of_recipes : Array[Array]
+
+
+func compare(input_array : Array) -> ItemDataConsumable:
+	if input_array == []:
+		return null
+	for i in self.list_of_recipes.size():
+		if input_array == list_of_recipes[i]:
+			return Recipe_output
+	return null
+
