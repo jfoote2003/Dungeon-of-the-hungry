@@ -1,0 +1,15 @@
+class_name Chest extends Node2D
+
+signal toggle_inventory(external_inventory_owner)
+
+@export var can_interact : bool = true
+@export var inventory_data : InventoryData
+
+#func _process(delta) -> void:
+	#if Input.is_action_just_pressed("interact") and can_interact:
+		#print("player pressed near object")
+		#toggle_inventory.emit(self)
+	#pass
+
+func interact_chest() -> void:
+	toggle_inventory.emit(self)
