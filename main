@@ -1,0 +1,60 @@
+extends Node2D
+
+@onready var player = $Player
+@onready var invetory_interface : Control = $CanvasLayer/InvetoryInterface
+@onready var cooking_ui = $CanvasLayer/InvetoryInterface/cookingUI
+@onready var hot_bar_inventory = $CanvasLayer/HotBarInventory
+
+
+
+func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED # add to ui or change it
+	player.toggle_inventory.connect(toggle_inventory_interface)
+	invetory_interface.set_player_inventory_data(player.inventory_data)
+	invetory_interface.set_helmet_inventory_data(player.helmet_inv_data)
+	invetory_interface.set_chest_inventory_data(player.chest_inv_data)
+	invetory_interface.set_greeves_inventory_data(player.greeves_inv_data)
+	invetory_interface.set_boots_inventory_data(player.boots_inv_data)
+	invetory_interface.set_rings_inventory_data(player.rings_inv_data)
+	invetory_interface.force_close.connect(toggle_inventory_interface)
+	invetory_interface.force_close.connect(toggle_cooking_interface)
+	hot_bar_inventory.set_inventory_data(player.inventory_data)
+	
+	for node in get_tree().get_nodes_in_group("external_inventory"):
+		node.toggle_inventory.connect(toggle_inventory_interface)
+	
+	for node in get_tree().get_nodes_in_group("cooking_inventory"):
+		node.toggle_cooking.connect(toggle_cooking_interface)
+
+func toggle_inventory_interface(external_inventory_owner = null) -> void:
+	invetory_interface.visible = not invetory_interface.visible
+	
+	if invetory_interface.visible:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		hot_bar_inventory.hide()
+	else:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		hot_bar_inventory.show()
+	
+	if external_inventory_owner and invetory_interface.visible:
+		invetory_interface.set_external_inventory(external_inventory_owner)
+	else:
+		invetory_interface.clear_external_inventory()
+	
+
+func toggle_cooking_interface(cooking_inventory_owner = null) -> void:
+	invetory_interface.visible = not invetory_interface.visible
+	
+	if invetory_interface.visible:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		hot_bar_inventory.hide()
+	else:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		hot_bar_inventory.show()
+	
+	if cooking_inventory_owner and invetory_interface.visible:
+		invetory_interface.set_cooking_inventory(cooking_inventory_owner)
+	else:
+		invetory_interface.clear_cooking_inventory()
+
+
