@@ -1,0 +1,58 @@
+class_name State_Dash extends State
+
+var dashing : bool = false
+@export_range(1,30,0.5) var deceleration_speed : float = 10.0
+var dash_speed : float = 400
+
+@onready var animation_player = $"../../AnimationPlayer"
+@onready var audio_stream_player = $"../../AudioStreamPlayer2D"
+
+
+@onready var walk = $"../walk"
+@onready var idle = $"../idle"
+
+
+func _ready() -> void:
+	
+	pass
+
+func init() -> void:
+	
+	pass
+
+func exit() -> void:
+	animation_player.animation_finished.disconnect(_end_dash)
+	dashing = false
+	pass
+
+func enter() -> void:
+	player.update_animation("dash")
+	animation_player.animation_finished.connect(_end_dash)
+	
+	dashing = true
+	
+	player.velocity += player.direction * dash_speed
+	pass
+
+func process(_delta : float) -> State:
+	player.velocity -= player.velocity * deceleration_speed * _delta
+	
+	if dashing == false:
+		if player.direction == Vector2.ZERO:
+			return idle
+		else:
+			return walk
+	return null
+
+func physics(_delta : float) -> State:
+	
+	return null
+
+func handle_input(_event : InputEvent) -> State:
+	
+	return null
+
+func _end_dash(_newAnimName : String) -> void:
+	dashing = false
+
+
