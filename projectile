@@ -1,0 +1,22 @@
+extends CharacterBody2D
+
+@export var item_data : Spell
+@onready var sprite = $Sprite2D
+
+var direction : Vector2
+var spawnPOS : Vector2
+
+
+func _ready() -> void:
+	global_position = spawnPOS
+	sprite.texture = item_data.projectile_texture
+	pass
+
+func _process(_delta) -> void:
+	pass
+
+func _physics_process(_delta):
+	
+	velocity = item_data.speed * direction
+	move_and_slide()
+
