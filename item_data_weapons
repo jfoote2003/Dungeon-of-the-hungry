@@ -1,0 +1,9 @@
+class_name ItemDataWeapons extends ItemData
+
+@export var is_weapon : bool = true
+@export var effects : Effects
+
+func use(target) -> void:
+	if is_weapon:
+		target.fight(self)
+	pass
